@@ -1,4 +1,4 @@
-import PlaceCard from '../../components/placeCard/placeCard';
+import PlaceCard from '../../components/place-card/place-card';
 
 type MainScreenProps = {
   offersAmount: number;

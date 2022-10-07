@@ -1,0 +1,12 @@
+.not-found-page__content {
+  margin-bottom: 40px;
+  min-height: calc(100vh - 336px);
+}
+.not-found-page__text {
+  text-align: center;
+}
+
+.not-found-page__link {
+  display: block;
+  text-align: center;
+}
