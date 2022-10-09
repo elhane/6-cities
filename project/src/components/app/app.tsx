@@ -6,23 +6,24 @@ import RoomScreen from '../../pages/room-screen/room-screen';
 import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
+import {Offers} from '../../types/offer';
 
 type AppProps = {
   offersAmount: number;
-}
+  offers: Offers;
+};
 
-function App({offersAmount}: AppProps): JSX.Element {
-
+function App({offersAmount, offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<MainScreen offersAmount={offersAmount} />}/>
-        <Route path={AppRoute.Room} element={<RoomScreen />}/>
+        <Route path={AppRoute.Root} element={<MainScreen offersAmount={offersAmount} offers={offers} />}/>
+        <Route path={AppRoute.Room} element={<RoomScreen offers={offers} />}/>
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
         <Route path={AppRoute.Favourites} element=
           {
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen offers={offers} />
             </PrivateRoute>
           }
         />

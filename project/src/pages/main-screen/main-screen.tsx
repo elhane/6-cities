@@ -1,19 +1,25 @@
-import PlaceCard from '../../components/place-card/place-card';
+import {Offers} from '../../types/offer';
+import PlacesList from '../../components/places-list/places-list';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 
 type MainScreenProps = {
   offersAmount: number;
+  offers: Offers;
 }
 
-function MainScreen({offersAmount}: MainScreenProps):JSX.Element {
+function MainScreen({offersAmount, offers}: MainScreenProps):JSX.Element {
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
+              <Link className="header__logo-link header__logo-link--active" to={AppRoute.Root}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -94,11 +100,9 @@ function MainScreen({offersAmount}: MainScreenProps):JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {
-                  Array.from({length: 5}, (_, index) => index).map((item) => <PlaceCard key={item} />)
-                }
-              </div>
+
+              <PlacesList offers={offers} />
+
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
