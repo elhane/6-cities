@@ -2,7 +2,7 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import RoomScreen from '../../pages/room-screen/room-screen';
+import PlaceScreen from '../../pages/place-screen/place-screen';
 import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -18,7 +18,7 @@ function App({offersAmount, offers}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<MainScreen offersAmount={offersAmount} offers={offers} />}/>
-        <Route path={AppRoute.Room} element={<RoomScreen offers={offers} />}/>
+        <Route path={AppRoute.Room} element={<PlaceScreen offers={offers} />}/>
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
         <Route path={AppRoute.Favourites} element=
           {

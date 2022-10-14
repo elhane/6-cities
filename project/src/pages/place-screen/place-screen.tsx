@@ -3,15 +3,18 @@ import {Link, useParams} from 'react-router-dom';
 import NearPlacesList from '../../components/favorites-places-list/favorites-places-list';
 import {Offers, Offer} from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
-import {getPercentRatio, getFormattedDate} from '../../utils';
+import {getPercentRatio} from '../../utils';
 import {MAX_RATING} from '../../const';
 import {reviews} from '../../mocks/reviews';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import Map from '../../components/map/map';
+import {CITY} from '../../mocks/city';
 
-type RoomScreenProps = {
+type PlaceScreenProps = {
   offers: Offers;
 }
 
-function RoomScreen({offers}: RoomScreenProps):JSX.Element {
+function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
   const params = useParams();
 
   const currentOffer = offers.find((offer) => offer.id === params.id) as Offer;
@@ -150,44 +153,15 @@ function RoomScreen({offers}: RoomScreenProps):JSX.Element {
               </div>
 
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-
-                  { reviews.length ? (
-                    reviews.map((review) => (
-                      <li className="reviews__item" key={review.id}>
-                        <div className="reviews__user user">
-                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                            <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
-                          </div>
-                          <span className="reviews__user-name">
-                            {review.user.name}
-                          </span>
-                        </div>
-                        <div className="reviews__info">
-                          <div className="reviews__rating rating">
-                            <div className="reviews__stars rating__stars">
-                              <span style={{width: `${getPercentRatio(review.rating, MAX_RATING)}%` }}></span>
-                              <span className="visually-hidden">Rating</span>
-                            </div>
-                          </div>
-                          <p className="reviews__text">
-                            {review.comment}
-                          </p>
-                          <time className="reviews__time" dateTime="2019-04-24">{getFormattedDate(review.date)}</time>
-                        </div>
-                      </li>
-                    ))
-                  ) : '' }
-
-                </ul>
-
+                <ReviewsList />
                 <ReviewForm />
 
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map city={CITY} offers={offers}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -203,4 +177,4 @@ function RoomScreen({offers}: RoomScreenProps):JSX.Element {
   );
 }
 
-export default RoomScreen;
+export default PlaceScreen;
