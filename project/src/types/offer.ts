@@ -22,7 +22,9 @@ export type Offer = {
   facilities: string[]
   isFavorite: boolean,
   host: Host,
-  previewImage: string
+  previewImage: string,
+  lat: number,
+  lng: number
 }
 
 

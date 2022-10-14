@@ -31,7 +31,9 @@ export const offers: Offers = [
       hostName: 'Melissa',
       isPro: false
     },
-    previewImage: 'img/apartment-01.jpg'
+    previewImage: 'img/apartment-01.jpg',
+    lat: 52.3909553943508,
+    lng: 4.85309666406198
   },
   {
     id: '2',
@@ -63,7 +65,9 @@ export const offers: Offers = [
       hostName: 'Max',
       isPro: false
     },
-    previewImage: 'img/apartment-02.jpg'
+    previewImage: 'img/apartment-02.jpg',
+    lat: 52.3609553943508,
+    lng: 4.85309666406198
   },
   {
     id: '3',
@@ -95,7 +99,9 @@ export const offers: Offers = [
       hostName: 'Melissa',
       isPro: false
     },
-    previewImage: 'img/apartment-03.jpg'
+    previewImage: 'img/apartment-03.jpg',
+    lat: 52.3909553943508,
+    lng: 4.929309666406198
   },
   {
     id: '4',
@@ -127,6 +133,8 @@ export const offers: Offers = [
       hostName: 'Melissa',
       isPro: false
     },
-    previewImage: 'img/apartment-01.jpg'
+    previewImage: 'img/apartment-01.jpg',
+    lat: 52.3809553943508,
+    lng: 4.939309666406198
   },
 ];

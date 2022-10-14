@@ -2,7 +2,8 @@ import {Offers} from '../../types/offer';
 import PlacesList from '../../components/places-list/places-list';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-
+import Map from '../../components/map/map';
+import {CITY} from '../../mocks/city';
 
 type MainScreenProps = {
   offersAmount: number;
@@ -105,7 +106,10 @@ function MainScreen({offersAmount, offers}: MainScreenProps):JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+
+              <section className="cities__map map">
+                <Map city={CITY} offers={offers}/>
+              </section>
             </div>
           </div>
         </div>
