@@ -16,6 +16,10 @@ export type City = {
   location: Location;
 };
 
+export type Image = {
+  src: string;
+}
+
 export type Offer = {
   bedrooms: number;
   city: City;
