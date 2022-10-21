@@ -1,0 +1,12 @@
+.form-error {
+  position: absolute;
+  bottom: 15px;
+  right: 4px;
+  color: rgba(197, 33, 4, 0.68);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.form-error p {
+  margin-top: 0;
+}
