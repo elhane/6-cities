@@ -1,23 +1,21 @@
-import {AppRoute} from '../../const';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import NearPlacesList from '../../components/favorites-places-list/favorites-places-list';
-import {Offers, Offer} from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
 import {getPercentRatio} from '../../utils';
 import {MAX_RATING} from '../../const';
-import {reviews} from '../../mocks/reviews';
+// import {reviews} from '../../mocks/reviews';
 import ReviewsList from '../../components/reviews-list/reviews-list';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import {CITY} from '../../mocks/city';
 
-type PlaceScreenProps = {
-  offers: Offers;
-}
-
-function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
+function PlaceScreen():JSX.Element {
+  const dispatch = useAppDispatch();
   const params = useParams();
-
-  const currentOffer = offers.find((offer) => offer.id === params.id) as Offer;
+  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   const {
     images,
@@ -25,47 +23,28 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
     bedrooms,
     description,
     isPremium,
-    placeType,
+    type,
     rating,
     maxAdults,
-    pricePerNight,
-    facilities,
+    price,
+    goods,
     host,
+    city
   } = currentOffer;
 
-  // eslint-disable-next-line no-console
-  console.debug(reviews);
+  useEffect(() => {
+    dispatch(fetchCurrentOfferAction(params?.id));
+    dispatch(fetchNearbyOffersAction(params?.id));
+  }, [dispatch, params?.id]);
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [params?.id]);
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to={AppRoute.Root}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header isShowLoginLink />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -73,8 +52,8 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
             <div className="property__gallery">
               { images ? (
                 images.map((image) => (
-                  <div className="property__image-wrapper" key={image.src}>
-                    <img className="property__image" src={image.src} alt="Photo studio" />
+                  <div className="property__image-wrapper" key={image}>
+                    <img className="property__image" src={image} alt="Photo studio" />
                   </div>
                 ))
               ) : '' }
@@ -107,7 +86,7 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {placeType}
+                  {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
@@ -117,14 +96,14 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{pricePerNight}</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  { facilities.length ?
-                    facilities.map((facility) => (
+                  { goods.length ?
+                    goods.map((facility) => (
                       <li className="property__inside-item" key={facility}>
                         {facility}
                       </li>
@@ -135,10 +114,10 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={host.hostAvatar} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {host.hostName}
+                    {host.name}
                   </span>
                   { host.isPro ?
                     <span className="property__user-status">
@@ -155,12 +134,11 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
               <section className="property__reviews reviews">
                 <ReviewsList />
                 <ReviewForm />
-
               </section>
             </div>
           </div>
           <section className="property__map map">
-            <Map city={CITY} offers={offers}/>
+            <Map city={city} offers={nearbyOffers}/>
           </section>
         </section>
         <div className="container">
@@ -168,7 +146,7 @@ function PlaceScreen({offers}: PlaceScreenProps):JSX.Element {
 
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <NearPlacesList offers={offers} />
+            <NearPlacesList offers={nearbyOffers} />
 
           </section>
         </div>

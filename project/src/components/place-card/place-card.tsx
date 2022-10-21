@@ -14,7 +14,7 @@ type PlaceCardProps = {
 
 function PlaceCard(props: PlaceCardProps):JSX.Element {
   const {offer, isCitiesListCard, isFavoritesListCard, isNearPlacesListCard} = props;
-  const {previewImage, pricePerNight, title, placeType, id, isPremium, rating} = offer;
+  const {previewImage, price, title, type, id, isPremium, rating} = offer;
   const [isCardActive, setIsCardActive] = useState(false);
 
   const cardClass = classNames({
@@ -66,7 +66,7 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
 
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{pricePerNight}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
@@ -89,7 +89,7 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
           <Link to={`/room/${id}`}>{title}</Link>
         </h2>
 
-        <p className="place-card__type">{placeType}</p>
+        <p className="place-card__type">{type}</p>
 
       </div>
     </article>

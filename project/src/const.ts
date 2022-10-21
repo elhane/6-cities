@@ -35,5 +35,7 @@ export const DEFAULT_CITY_DATA = {
 export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
-  Offers = '/hotels'
+  Offers = '/hotels',
+  Favorites = '/favorites',
+  Nearby = '/nearby'
 }

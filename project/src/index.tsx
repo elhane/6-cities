@@ -17,7 +17,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
-      <App offersAmount={312}/>
+      <App />
     </Provider>
 
   </React.StrictMode>,

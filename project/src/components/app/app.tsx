@@ -10,19 +10,15 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {useAppSelector} from '../../hooks';
 
-type AppProps = {
-  offersAmount: number;
-};
-
-function App({offersAmount}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
-        <Route path={AppRoute.Root} element={<MainScreen offersAmount={offersAmount} offers={offers} />}/>
-        <Route path={AppRoute.Room} element={<PlaceScreen offers={offers} />}/>
+        <Route path={AppRoute.Root} element={<MainScreen />}/>
+        <Route path={AppRoute.Room} element={<PlaceScreen />}/>
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
         <Route path={AppRoute.Favourites} element=
           {

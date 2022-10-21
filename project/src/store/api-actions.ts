@@ -1,6 +1,6 @@
 import {AppDispatch, State} from '../types/state.js';
 import {AxiosInstance} from 'axios';
-import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {
   loadOffers,
@@ -75,20 +75,22 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, asyncThunkCon
 
 export const fetchCurrentOfferAction = createAsyncThunk<void, string | undefined, asyncThunkConfigType>('offers/fetchCurrentOffer',
   async (id, {dispatch, extra: api }) => {
-  try {
-    const {data: currentOffer} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-    dispatch(setCurrentOffer(currentOffer));
-  } catch {
-    //
-  }
-});
+    try {
+      const {data: currentOffer} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+      dispatch(setCurrentOffer(currentOffer));
+    } catch {
+      //
+    }
+  },
+);
 
 export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined, asyncThunkConfigType>('offers/fetchNearbyOffers',
   async (id, {dispatch, extra: api}) => {
-  try {
-    const {data: nearbyOffers} = await api.get<Offers>(`${APIRoute.Offers}/${id}${APIRoute.Nearby}`);
-    dispatch(setNearbyOffers(nearbyOffers));
-  } catch {
-    //
-  }
-});
+    try {
+      const {data: nearbyOffers} = await api.get<Offers>(`${APIRoute.Offers}/${id}${APIRoute.Nearby}`);
+      dispatch(setNearbyOffers(nearbyOffers));
+    } catch {
+      //
+    }
+  },
+);

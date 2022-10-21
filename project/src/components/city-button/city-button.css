@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-.active {
+.tabs__item.active {
   text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
   color: #fff;
   background-color: #4481c3;
