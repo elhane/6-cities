@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import {offers} from './mocks/offers';
+import {Provider} from 'react-redux';
+import {store} from './store';
+import {checkAuthAction, fetchOffersAction} from './store/api-actions';
+import ErrorMessage from './components/error-message/error-message';
+
+store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-// const offersAmount: number = 312;
-
 root.render(
   <React.StrictMode>
-    <App offersAmount={312} offers={offers}/>
+    <Provider store={store}>
+      <ErrorMessage />
+      <App offersAmount={312}/>
+    </Provider>
+
   </React.StrictMode>,
 );

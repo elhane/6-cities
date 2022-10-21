@@ -1,36 +1,39 @@
 import MainScreen from '../../pages/main-screen/main-screen';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import PlaceScreen from '../../pages/place-screen/place-screen';
 import PrivateRoute from '../private-route/private-route';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
-import {Offers} from '../../types/offer';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+import {useAppSelector} from '../../hooks';
 
 type AppProps = {
   offersAmount: number;
-  offers: Offers;
 };
 
-function App({offersAmount, offers}: AppProps): JSX.Element {
+function App({offersAmount}: AppProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root} element={<MainScreen offersAmount={offersAmount} offers={offers} />}/>
         <Route path={AppRoute.Room} element={<PlaceScreen offers={offers} />}/>
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
         <Route path={AppRoute.Favourites} element=
           {
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen offers={offers} />
             </PrivateRoute>
           }
         />
-
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
