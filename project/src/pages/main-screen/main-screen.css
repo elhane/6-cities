@@ -1,0 +1,19 @@
+.places {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  scrollbar-color: #4481c3 #d3d3d3;
+}
+
+.places::-webkit-scrollbar {
+   width: 5px;
+}
+
+.places::-webkit-scrollbar-track {
+   background-color: #d3d3d3;
+   border-radius: 2px;
+}
+
+.places::-webkit-scrollbar-thumb {
+   background-color: #4481c3;
+   border-radius: 2px;
+}

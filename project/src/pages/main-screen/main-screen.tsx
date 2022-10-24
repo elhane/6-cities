@@ -4,6 +4,7 @@ import CityTabs from '../../components/city-tabs/city-tabs';
 import {CITIES, DEFAULT_CITY_DATA} from '../../const';
 import Header from '../../components/header/header';
 import {useAppSelector} from '../../hooks';
+import './main-screen.css';
 
 function MainScreen():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
