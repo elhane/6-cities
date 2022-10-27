@@ -6,7 +6,7 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization,
-  setAuthorizationStatus, setCurrentOffer,
+  setAuthorizationStatus, setBookmarksList, setCurrentOffer,
   setError, setNearbyOffers, setUserData
 } from './action';
 import {store} from './';
@@ -93,4 +93,26 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined
       //
     }
   },
+);
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offers, undefined, asyncThunkConfigType>('offers/fetchFavoriteOffers',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offers>(APIRoute.Favorite);
+    setBookmarksList(data);
+    return data;
+  }
+);
+
+export const postOfferFavoriteStatusAction = createAsyncThunk<Offers, [number, number], {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'film/postOfferFavoriteStatus',
+  async ([offerId, offerStatus], {extra: api}) => {
+    await api.post(`${APIRoute.Favorite}/${offerId}/${offerStatus}`);
+    const {data} = await api.get<Offers>(APIRoute.Favorite);
+    setBookmarksList(data);
+    return data;
+  }
 );

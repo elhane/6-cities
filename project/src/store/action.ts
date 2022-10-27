@@ -14,6 +14,5 @@ export const setActiveCity = createAction<string>('offers/setActiveCity');
 export const loadOffers = createAction<Offers>('offers/loadOffers');
 export const setCurrentOffer = createAction<Offer>('offers/setCurrentOffer');
 export const setNearbyOffers = createAction<Offers>('offers/setNearbyOffers');
-// export const setFavoritesList = createAction<Offers>('offers/setFavoritesList');
-
+export const setBookmarksList = createAction<Offers>('offers/setBookmarksList');
 

@@ -4,7 +4,11 @@ import {
   setActiveCity,
   requireAuthorization,
   setError,
-  setUserData, setAuthorizationStatus, setCurrentOffer, setNearbyOffers
+  setUserData,
+  setAuthorizationStatus,
+  setCurrentOffer,
+  setNearbyOffers,
+  setBookmarksList
 } from './action';
 import {Offers, Offer} from '../types/offer';
 import {AuthorizationStatus} from '../const';
@@ -18,6 +22,7 @@ type InitialStateType = {
   userData: UserType,
   currentOffer: Offer,
   nearbyOffers: Offers;
+  bookmarksList: Offers;
 }
 
 const initialState:InitialStateType = {
@@ -66,7 +71,8 @@ const initialState:InitialStateType = {
     title: '',
     type: '',
   },
-  nearbyOffers: []
+  nearbyOffers: [],
+  bookmarksList: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -94,6 +100,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
+    })
+    .addCase(setBookmarksList, (state, action) => {
+      state.bookmarksList = action.payload;
     });
 });
 
