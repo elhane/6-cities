@@ -10,6 +10,7 @@ import {useEffect} from 'react';
 import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
+import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 
 function PlaceScreen():JSX.Element {
   const dispatch = useAppDispatch();
@@ -76,6 +77,8 @@ function PlaceScreen():JSX.Element {
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
+
+                <BookmarkButton placeId={Number(params?.id)} isPropertyPage />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

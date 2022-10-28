@@ -2,7 +2,7 @@ import {AppRoute, AuthorizationStatus, BookmarksAction} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useNavigate} from 'react-router-dom';
 import {
-  fetchFavoriteOffersAction, fetchOffersAction,
+  fetchFavoriteOffersAction,
   postOfferFavoriteStatusAction
 } from '../../store/api-actions';
 import classNames from 'classnames';
@@ -10,22 +10,19 @@ import {useEffect} from 'react';
 
 type BookmarkButtonProps = {
   placeId: number;
-  isFavorite: boolean;
+  isPropertyPage?: boolean;
 }
 
-function BookmarkButton({placeId, isFavorite}: BookmarkButtonProps):JSX.Element {
+function BookmarkButton({placeId, isPropertyPage = false}: BookmarkButtonProps):JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const bookmarksList = useAppSelector((state) => state.bookmarksList);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const isOfferInBookmarks = bookmarksList.find((offer) => offer.id === placeId);
-
-  // eslint-disable-next-line no-console
-  console.debug('bookmarksList', bookmarksList);
+  const isOfferInBookmarks = bookmarksList.find((offer) => offer.id === placeId);
 
   const handleBookmarkButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(postOfferFavoriteStatusAction([placeId, isFavorite ? BookmarksAction.Delete : BookmarksAction.Add]));
+      dispatch(postOfferFavoriteStatusAction([placeId, isOfferInBookmarks ? BookmarksAction.Delete : BookmarksAction.Add]));
     } else {
       navigate(AppRoute.Login);
     }
@@ -34,21 +31,27 @@ function BookmarkButton({placeId, isFavorite}: BookmarkButtonProps):JSX.Element 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoriteOffersAction());
-      dispatch(fetchOffersAction());
     }
-  }, [dispatch, authorizationStatus]);
+  }, [authorizationStatus]);
 
   const placeCardClass = classNames({
     'place-card__bookmark-button': true,
-    'place-card__bookmark-button--active': isFavorite,
+    'place-card__bookmark-button--active': isOfferInBookmarks,
+    'property__bookmark-button': isPropertyPage,
+    'property__bookmark-button--active': isPropertyPage && isOfferInBookmarks,
     'button': true,
   });
 
   return (
     <button className={placeCardClass} type="button" onClick={handleBookmarkButtonClick}>
-      <svg className="place-card__bookmark-icon" width="18" height="19">
-        <use xlinkHref="#icon-bookmark"></use>
-      </svg>
+      { isPropertyPage ?
+        <svg className="place-card__bookmark-icon" width="31" height="33">
+          <use xlinkHref="#icon-bookmark"></use>
+        </svg>
+        :
+        <svg className="place-card__bookmark-icon" width="18" height="19">
+          <use xlinkHref="#icon-bookmark"></use>
+        </svg> }
       <span className="visually-hidden">In bookmarks</span>
     </button>
   );

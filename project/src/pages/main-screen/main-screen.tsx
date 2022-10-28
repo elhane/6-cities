@@ -1,16 +1,32 @@
+import './main-screen.css';
 import PlacesList from '../../components/places-list/places-list';
 import Map from '../../components/map/map';
 import CityTabs from '../../components/city-tabs/city-tabs';
-import {CITIES, DEFAULT_CITY_DATA} from '../../const';
+import {AuthorizationStatus, CITIES, DEFAULT_CITY_DATA} from '../../const';
 import Header from '../../components/header/header';
-import {useAppSelector} from '../../hooks';
-import './main-screen.css';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchFavoriteOffersAction, fetchOffersAction} from '../../store/api-actions';
 
 function MainScreen():JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const activeCityData = filteredOffers[0] ? filteredOffers[0].city : DEFAULT_CITY_DATA;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
+
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">

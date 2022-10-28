@@ -37,5 +37,11 @@ export enum APIRoute {
   Logout = '/logout',
   Offers = '/hotels',
   Favorites = '/favorites',
+  Favorite = '/favorite',
   Nearby = '/nearby'
+}
+
+export enum BookmarksAction {
+  Delete = 0,
+  Add = 1
 }

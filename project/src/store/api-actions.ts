@@ -96,9 +96,9 @@ export const fetchNearbyOffersAction = createAsyncThunk<void, string | undefined
 );
 
 export const fetchFavoriteOffersAction = createAsyncThunk<Offers, undefined, asyncThunkConfigType>('offers/fetchFavoriteOffers',
-  async (_arg, {extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offers>(APIRoute.Favorite);
-    setBookmarksList(data);
+    dispatch(setBookmarksList(data));
     return data;
   }
 );
@@ -109,10 +109,10 @@ export const postOfferFavoriteStatusAction = createAsyncThunk<Offers, [number, n
   extra: AxiosInstance
 }>(
   'film/postOfferFavoriteStatus',
-  async ([offerId, offerStatus], {extra: api}) => {
+  async ([offerId, offerStatus], {dispatch,extra: api}) => {
     await api.post(`${APIRoute.Favorite}/${offerId}/${offerStatus}`);
     const {data} = await api.get<Offers>(APIRoute.Favorite);
-    setBookmarksList(data);
+    dispatch(setBookmarksList(data));
     return data;
   }
 );

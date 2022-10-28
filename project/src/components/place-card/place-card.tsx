@@ -15,7 +15,7 @@ type PlaceCardProps = {
 
 function PlaceCard(props: PlaceCardProps):JSX.Element {
   const {offer, isCitiesListCard, isFavoritesListCard, isNearPlacesListCard } = props;
-  const {previewImage, price, title, type, id, isPremium, rating, isFavorite} = offer;
+  const {previewImage, price, title, type, id, isPremium, rating} = offer;
   const [isCardActive, setIsCardActive] = useState(false);
 
   const cardClass = classNames({
@@ -71,7 +71,7 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <BookmarkButton placeId={id} isFavorite={isFavorite}/>
+          <BookmarkButton placeId={id} />
 
         </div>
 
