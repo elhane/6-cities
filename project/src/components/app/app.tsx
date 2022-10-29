@@ -11,7 +11,6 @@ import browserHistory from '../../browser-history';
 import {useAppSelector} from '../../hooks';
 
 function App(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
@@ -23,7 +22,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Favourites} element=
           {
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen offers={offers} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />

@@ -5,18 +5,16 @@ type NearPlacesListProps = {
   offers: Offers;
 }
 
-function NearPlacesList(props: NearPlacesListProps):JSX.Element {
-  const {offers} = props;
-  const filteredOffers = offers.slice(0, 3);
+function FavoritesPlacesList({offers}: NearPlacesListProps):JSX.Element {
 
   return (
-    <div className="near-places__list places__list">
-      {offers.length ? (
-        filteredOffers.map((offer) => (
+    <div className="favorites__places">
+      {FavoritesPlacesList.length ? (
+        offers.map((offer) => (
           <PlaceCard
             key={offer.id}
             offer={offer}
-            isNearPlacesListCard
+            isFavoritesListCard
           />
         ))
       ) : ''}
@@ -24,4 +22,4 @@ function NearPlacesList(props: NearPlacesListProps):JSX.Element {
   );
 }
 
-export default NearPlacesList;
+export default FavoritesPlacesList;

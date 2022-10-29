@@ -12,6 +12,7 @@ function Header({isShowLoginLink = true}: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
+  const bookmarkOffers = useAppSelector((state) => state.bookmarksList);
 
   return (
     <header className="header">
@@ -29,7 +30,7 @@ function Header({isShowLoginLink = true}: HeaderProps): JSX.Element {
                   <Link to={AppRoute.Favourites} className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">{userData.email}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{bookmarkOffers.length}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">
