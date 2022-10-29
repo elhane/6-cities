@@ -1,21 +1,8 @@
 import Review from '../review/review';
-import {ReviewType} from '../../types/reviews';
+import {useAppSelector} from '../../hooks';
 
 function ReviewsList():JSX.Element {
-  const reviews:ReviewType[] = [
-    {
-      comment: 'string',
-      date: 'string',
-      id: 4,
-      rating: 6,
-      user: {
-        avatarUrl: 'string',
-        id: 7,
-        isPro: true,
-        name: 'string',
-      }
-    }
-  ];
+  const reviews = useAppSelector((state) => state.reviews);
 
   return (
     <>

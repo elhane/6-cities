@@ -1,16 +1,24 @@
+import './review-form.css';
 import React, {useState, ChangeEvent, FormEvent, useEffect} from 'react';
-import {MIN_COMMENT_LENGTH} from '../../const';
+import {useParams} from 'react-router-dom';
+import {MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {fetchOfferReviewsAction, postOfferReviewAction} from '../../store/api-actions';
+import FormError from '../form-error/form-error';
 
 function ReviewForm() {
-  const [formData, setFormData] = useState({rating: '0', review: ''});
-  // const [formErrors, setFormErrors] = useState({rating: '', review: ''});
+  const [formData, setFormData] = useState({rating: 0, comment: ''});
+  const [formErrors, setFormErrors] = useState({rating: '', comment: ''});
   const [formValid, setFormValid] = useState(false);
   const [reviewValid, setReviewValid] = useState(false);
   const [ratingValid, setRatingValid ] = useState(false);
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  const offerId = params.id;
 
   const validateField = (fieldName: string, value: string) => {
     switch(fieldName) {
-      case 'review':
+      case 'comment':
         validateTextarea(value);
         break;
       case 'rating':
@@ -22,16 +30,27 @@ function ReviewForm() {
   const validateRating = () => {
     if (Number(formData.rating) === 0) {
       setRatingValid(false);
+      setFormErrors({...formErrors, rating: 'the rating is not selected'});
     } else {
       setRatingValid(true);
+      setFormErrors({...formErrors, rating: ''});
     }
   };
 
   const validateTextarea = (value: string) => {
-    if (value.length < MIN_COMMENT_LENGTH || value.length === 0) {
-      setReviewValid(false);
-    } else {
-      setReviewValid(true);
+    switch (true) {
+      case (value.length < MIN_COMMENT_LENGTH || value.length === 0):
+        setReviewValid(false);
+        setFormErrors({...formErrors, comment: reviewValid ? '' : 'too short, the comment must contain at least 50 characters'});
+        break;
+      case value.length > MAX_COMMENT_LENGTH:
+        setReviewValid(false);
+        setFormErrors({...formErrors, comment: reviewValid ? '' : 'too long, the comment must contain no more than 500 characters'});
+        break;
+      case (value.length > MIN_COMMENT_LENGTH && value.length < MAX_COMMENT_LENGTH):
+        setReviewValid(true);
+        setFormErrors({rating: '', comment: ''});
+        break;
     }
   };
 
@@ -45,7 +64,8 @@ function ReviewForm() {
     evt.preventDefault();
 
     if (formValid) {
-      // console.debug('valid form');
+      dispatch(postOfferReviewAction([offerId, formData]));
+      dispatch(fetchOfferReviewsAction(offerId));
     }
   };
 
@@ -76,7 +96,6 @@ function ReviewForm() {
     <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-
         { Array.from({length: 5}).map((_, index) => {
           const keyValue = 5 - index;
 
@@ -102,16 +121,19 @@ function ReviewForm() {
             </React.Fragment>
           );
         }) }
-
+        {!ratingValid ? <FormError error={formErrors.rating} extraClass={'reviews__error reviews__error--rating'}/> : null}
       </div>
-      <textarea
-        className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleFieldChange}
-      >
-      </textarea>
+      <label className="reviews__label">
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="comment"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={handleFieldChange}
+        >
+        </textarea>
+        {!reviewValid ? <FormError error={formErrors.comment} extraClass={'reviews__error'}/> : null}
+      </label>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

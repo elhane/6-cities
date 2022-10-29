@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {
-  loadOffers,
+  setOffers,
   setActiveCity,
   requireAuthorization,
   setError,
@@ -8,11 +8,12 @@ import {
   setAuthorizationStatus,
   setCurrentOffer,
   setNearbyOffers,
-  setBookmarksList
+  setBookmarksList, setReviews
 } from './action';
 import {Offers, Offer} from '../types/offer';
 import {AuthorizationStatus} from '../const';
 import {UserType} from '../types/user-data';
+import {Reviews} from '../types/reviews';
 
 type InitialStateType = {
   city: string;
@@ -23,6 +24,7 @@ type InitialStateType = {
   currentOffer: Offer,
   nearbyOffers: Offers;
   bookmarksList: Offers;
+  reviews: Reviews;
 }
 
 const initialState:InitialStateType = {
@@ -72,7 +74,8 @@ const initialState:InitialStateType = {
     type: '',
   },
   nearbyOffers: [],
-  bookmarksList: []
+  bookmarksList: [],
+  reviews: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -80,7 +83,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setActiveCity, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(loadOffers, (state, action) => {
+    .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
     })
     .addCase(requireAuthorization,(state, action) => {
@@ -103,6 +106,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setBookmarksList, (state, action) => {
       state.bookmarksList = action.payload;
+    })
+    .addCase(setReviews, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 

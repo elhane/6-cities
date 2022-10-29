@@ -14,6 +14,7 @@ export enum AuthorizationStatus {
 
 export const MAX_RATING = 5;
 export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 300;
 export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
@@ -38,7 +39,8 @@ export enum APIRoute {
   Offers = '/hotels',
   Favorites = '/favorites',
   Favorite = '/favorite',
-  Nearby = '/nearby'
+  Nearby = '/nearby',
+  Reviews = '/comments'
 }
 
 export enum BookmarksAction {

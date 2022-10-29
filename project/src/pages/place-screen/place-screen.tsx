@@ -2,12 +2,15 @@ import {useParams} from 'react-router-dom';
 import NearPlacesList from '../../components/favorites-places-list/favorites-places-list';
 import ReviewForm from '../../components/review-form/review-form';
 import {getPercentRatio} from '../../utils';
-import {MAX_RATING} from '../../const';
-// import {reviews} from '../../mocks/reviews';
+import {AuthorizationStatus, MAX_RATING} from '../../const';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
-import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import {
+  fetchCurrentOfferAction,
+  fetchNearbyOffersAction,
+  fetchOfferReviewsAction
+} from '../../store/api-actions';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
@@ -17,6 +20,7 @@ function PlaceScreen():JSX.Element {
   const params = useParams();
   const currentOffer = useAppSelector((state) => state.currentOffer);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const {
     images,
@@ -36,6 +40,7 @@ function PlaceScreen():JSX.Element {
   useEffect(() => {
     dispatch(fetchCurrentOfferAction(params?.id));
     dispatch(fetchNearbyOffersAction(params?.id));
+    dispatch(fetchOfferReviewsAction(params?.id));
   }, [dispatch, params?.id]);
 
   useEffect(() => {
@@ -136,7 +141,7 @@ function PlaceScreen():JSX.Element {
 
               <section className="property__reviews reviews">
                 <ReviewsList />
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.Auth ? <ReviewForm /> : null}
               </section>
             </div>
           </div>

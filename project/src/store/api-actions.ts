@@ -3,7 +3,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {
-  loadOffers,
+  setOffers, setReviews,
   redirectToRoute,
   requireAuthorization,
   setAuthorizationStatus, setBookmarksList, setCurrentOffer,
@@ -14,6 +14,7 @@ import {UserData, UserType} from '../types/user-data';
 import {AuthData} from '../types/auth-data';
 import {dropToken, saveToken} from '../services/token';
 import {Offer, Offers} from '../types/offer';
+import {ReviewData, Reviews} from '../types/reviews';
 
 type asyncThunkConfigType = {
   dispatch: AppDispatch;
@@ -69,7 +70,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, asyncThunkCon
   'offers/fetchOffers',
   async (_arg, {dispatch,extra: api}) => {
     const {data} = await api.get<Offers>(APIRoute.Offers);
-    dispatch(loadOffers(data));
+    dispatch(setOffers(data));
   },
 );
 
@@ -103,16 +104,27 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offers, undefined, asy
   }
 );
 
-export const postOfferFavoriteStatusAction = createAsyncThunk<Offers, [number, number], {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}>(
-  'film/postOfferFavoriteStatus',
+export const postOfferFavoriteStatusAction = createAsyncThunk<Offers, [number, number], asyncThunkConfigType>(
+  'offer/postOfferFavoriteStatus',
   async ([offerId, offerStatus], {dispatch,extra: api}) => {
     await api.post(`${APIRoute.Favorite}/${offerId}/${offerStatus}`);
     const {data} = await api.get<Offers>(APIRoute.Favorite);
     dispatch(setBookmarksList(data));
     return data;
+  }
+);
+
+export const fetchOfferReviewsAction = createAsyncThunk<Reviews, string | undefined, asyncThunkConfigType>('reviews/fetchOfferReviews',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Reviews>(`${APIRoute.Reviews}/${id}`);
+    dispatch(setReviews(data));
+    return data;
+  }
+);
+
+
+export const postOfferReviewAction = createAsyncThunk<void, [(string | undefined), ReviewData], asyncThunkConfigType>('reviews/postOfferReview',
+  async ([offerId, {comment, rating}], {extra: api}) => {
+    await api.post<ReviewData>(`${APIRoute.Reviews}/${offerId}`, {comment,rating});
   }
 );
