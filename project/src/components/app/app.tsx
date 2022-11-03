@@ -10,9 +10,17 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {useAppSelector} from '../../hooks';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {isCheckedAuth} from '../../utils';
+import Spinner from '../spinner/spinner';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (isCheckedAuth(authorizationStatus)) {
+    return (
+      <Spinner />
+    );
+  }
 
   return (
     <HistoryRouter history={browserHistory}>

@@ -2,49 +2,60 @@ import './favorites-screen.css';
 import FavoritesPlacesList
   from '../../components/favorites-places-list/favorites-places-list';
 import Header from '../../components/header/header';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import Footer from '../../components/footer/footer';
-import {getFavoritesOffers} from '../../store/offers-process/selectors';
-
+import {getFavoritesOffers, getSpinnerStatus} from '../../store/offers-process/selectors';
+import {useEffect} from 'react';
+import {fetchFavoriteOffersAction} from '../../store/api-actions';
+import Spinner from '../../components/spinner/spinner';
 
 function FavoritesScreen():JSX.Element {
   const bookmarkOffers = useAppSelector(getFavoritesOffers);
   const cities = bookmarkOffers.map((offer) => offer.city.name);
   const citiesSet = Array.from(new Set(cities));
+  const dispatch = useAppDispatch();
+  const isShowSpinner = useAppSelector(getSpinnerStatus);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
 
   return (
-    <div className="page">
-      <Header isShowLoginLink />
+    <>
+      {isShowSpinner ? <Spinner /> : ''}
+      <div className="page">
+        <Header isShowLoginLink />
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
 
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-
-            { bookmarkOffers.length ? (
-              <ul className="favorites__list">
-                { citiesSet.map((city) => (
-                  <li className="favorites__locations-items" key={city}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{city}</span>
-                        </a>
+              { bookmarkOffers.length ? (
+                <ul className="favorites__list">
+                  { citiesSet.map((city) => (
+                    <li className="favorites__locations-items" key={city}>
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href="#">
+                            <span>{city}</span>
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                    <FavoritesPlacesList
-                      offers={bookmarkOffers.filter((offer) => offer.city.name === city)}
-                    />
-                  </li>
-                )) }
-              </ul>
-            ) : <p className="favorites__empty-message">Nothing yet saved</p> }
-          </section>
-        </div>
-      </main>
+                      <FavoritesPlacesList
+                        offers={bookmarkOffers.filter((offer) => offer.city.name === city)}
+                      />
+                    </li>
+                  )) }
+                </ul>
+              ) : <p className="favorites__empty-message">Nothing yet saved</p> }
+            </section>
+          </div>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
+
   );
 }
 

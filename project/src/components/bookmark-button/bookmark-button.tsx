@@ -1,12 +1,8 @@
 import {AppRoute, AuthorizationStatus, BookmarksAction} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useNavigate} from 'react-router-dom';
-import {
-  fetchFavoriteOffersAction,
-  postOfferFavoriteStatusAction
-} from '../../store/api-actions';
+import {postOfferFavoriteStatusAction} from '../../store/api-actions';
 import classNames from 'classnames';
-import {useEffect} from 'react';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {getFavoritesOffers} from '../../store/offers-process/selectors';
 
@@ -29,12 +25,6 @@ function BookmarkButton({placeId, isPropertyPage = false}: BookmarkButtonProps):
       navigate(AppRoute.Login);
     }
   };
-
-  useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoriteOffersAction());
-    }
-  }, [authorizationStatus]);
 
   const placeCardClass = classNames({
     'place-card__bookmark-button': true,

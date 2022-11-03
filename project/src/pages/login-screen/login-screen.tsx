@@ -58,12 +58,9 @@ function LoginScreen():JSX.Element {
     setFormValid(loginValid && passwordValid);
   }, [loginValid, passwordValid]);
 
-
   return (
     <div className="page page--gray page--login">
-
       <Header isShowLoginLink={false}/>
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -87,7 +84,6 @@ function LoginScreen():JSX.Element {
                 />
                 {!loginValid ? <FormError error={ formErrors.loginError} /> : ''}
               </div>
-
 
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>

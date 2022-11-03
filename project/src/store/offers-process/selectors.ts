@@ -7,4 +7,4 @@ export const getOffers = (state: State): Offers => state[NameSpace.Offers].offer
 export const getCurrentOffer = (state: State): Offer => state[NameSpace.Offers].currentOffer;
 export const getNearbyOffers = (state: State): Offers => state[NameSpace.Offers].nearbyOffers;
 export const getFavoritesOffers = (state: State): Offers => state[NameSpace.Offers].bookmarksList;
-// export const getSpinnerStatus = (state: State): boolean => state[NameSpace.Data].isShowSpinner;
+export const getSpinnerStatus = (state: State): boolean => state[NameSpace.Offers].isShowSpinner;

@@ -1,5 +1,11 @@
+import {AuthorizationStatus} from './const';
 
 export const getPercentRatio = (number:number, from: number): number => (number / from) * 100;
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus
+): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
+
 
 export const getMonth = (monthNumber: number): string => {
   const monthsList = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];

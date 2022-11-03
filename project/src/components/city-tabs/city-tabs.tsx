@@ -1,7 +1,7 @@
 import React from 'react';
 import {Cities} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {setActiveCity} from '../../store/action';
+import {setActiveCity} from '../../store/offers-process/offers-process';
 import CityButton from '../city-button/city-button';
 import {getActiveCity} from '../../store/offers-process/selectors';
 

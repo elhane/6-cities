@@ -52,40 +52,46 @@ const initialState: OffersProcess = {
 export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveCity: (state, action) => {
+      state.city = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
-        //state.loader = true;
+        state.isShowSpinner = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        //state.loader = false;
+        state.isShowSpinner = false;
       })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
-        //state.loader = true;
+        state.isShowSpinner = true;
       })
       .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
-        //state.loader = false;
+        state.isShowSpinner = false;
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
-        //state.loader = true;
+        state.isShowSpinner = true;
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
-        //state.loader = false;
+        state.isShowSpinner = false;
       })
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        //state.loader = true;
+        state.isShowSpinner = true;
       })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.bookmarksList = action.payload;
-        //state.loader = false;
+        state.isShowSpinner = false;
       })
       .addCase(postOfferFavoriteStatusAction.fulfilled, (state, action) => {
         state.bookmarksList = action.payload;
-        //state.loader = false;
+        state.isShowSpinner = false;
       });
   }
 });
+
+export const {setActiveCity} = offersProcess.actions;

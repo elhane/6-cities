@@ -15,20 +15,20 @@ export const reviewsProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchOfferReviewsAction.pending, (state) => {
-        // loader true
+        state.isShowSpinner = true;
       })
       .addCase(fetchOfferReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        // loader false
+        state.isShowSpinner = false;
       })
       .addCase(postOfferReviewAction.pending, (state) => {
-        // loader true
+        state.isShowSpinner = true;
       })
       .addCase(postOfferReviewAction.fulfilled, (state) => {
-        // loader false
+        state.isShowSpinner = false;
       })
       .addCase(postOfferReviewAction.rejected, (state) => {
-        // loader false
+        state.isShowSpinner = false;
       });
   }
 });
