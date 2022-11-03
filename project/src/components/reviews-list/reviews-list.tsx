@@ -1,8 +1,9 @@
 import Review from '../review/review';
 import {useAppSelector} from '../../hooks';
+import {getReviews} from '../../store/reviews-process/selectors';
 
 function ReviewsList():JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
 
   return (
     <>

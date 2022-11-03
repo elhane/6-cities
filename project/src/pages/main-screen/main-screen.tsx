@@ -14,13 +14,15 @@ import {
   sortByRating
 } from '../../services/sorting';
 import {Offers} from '../../types/offer';
+import {getActiveCity, getOffers} from '../../store/offers-process/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function MainScreen():JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getActiveCity);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const activeCityData = filteredOffers[0] ? filteredOffers[0].city : DEFAULT_CITY_DATA;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const [selectedOption, setSelectedOption] = useState('popular');
 

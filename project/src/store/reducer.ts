@@ -16,11 +16,11 @@ import {UserType} from '../types/user-data';
 import {Reviews} from '../types/reviews';
 
 type InitialStateType = {
+  authorizationStatus: AuthorizationStatus;
+  userData: UserType,
+  error: string | null;
   city: string;
   offers: Offers;
-  authorizationStatus: AuthorizationStatus;
-  error: string | null;
-  userData: UserType,
   currentOffer: Offer,
   nearbyOffers: Offers;
   bookmarksList: Offers;
@@ -28,10 +28,7 @@ type InitialStateType = {
 }
 
 const initialState:InitialStateType = {
-  city: 'Paris',
-  offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
   userData: {
     name: '',
     email: '',
@@ -39,6 +36,9 @@ const initialState:InitialStateType = {
     avatarUrl: '',
     isPro: false
   },
+  error: null,
+  city: 'Paris',
+  offers: [],
   currentOffer: {
     bedrooms: 0,
     city: {

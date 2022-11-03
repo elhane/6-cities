@@ -14,13 +14,15 @@ import {
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
+import {getCurrentOffer, getNearbyOffers} from '../../store/offers-process/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function PlaceScreen():JSX.Element {
   const dispatch = useAppDispatch();
   const params = useParams();
-  const currentOffer = useAppSelector((state) => state.currentOffer);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const {
     images,

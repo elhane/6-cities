@@ -7,6 +7,8 @@ import {
 } from '../../store/api-actions';
 import classNames from 'classnames';
 import {useEffect} from 'react';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getFavoritesOffers} from '../../store/offers-process/selectors';
 
 type BookmarkButtonProps = {
   placeId: number;
@@ -14,8 +16,8 @@ type BookmarkButtonProps = {
 }
 
 function BookmarkButton({placeId, isPropertyPage = false}: BookmarkButtonProps):JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const bookmarksList = useAppSelector((state) => state.bookmarksList);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const bookmarksList = useAppSelector(getFavoritesOffers);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isOfferInBookmarks = bookmarksList.find((offer) => offer.id === placeId);

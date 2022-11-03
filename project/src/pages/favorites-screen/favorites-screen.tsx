@@ -4,10 +4,11 @@ import FavoritesPlacesList
 import Header from '../../components/header/header';
 import {useAppSelector} from '../../hooks';
 import Footer from '../../components/footer/footer';
+import {getFavoritesOffers} from '../../store/offers-process/selectors';
 
 
 function FavoritesScreen():JSX.Element {
-  const bookmarkOffers = useAppSelector((state) => state.bookmarksList);
+  const bookmarkOffers = useAppSelector(getFavoritesOffers);
   const cities = bookmarkOffers.map((offer) => offer.city.name);
   const citiesSet = Array.from(new Set(cities));
 

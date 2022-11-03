@@ -47,3 +47,14 @@ export enum BookmarksAction {
   Delete = 0,
   Add = 1
 }
+
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Reviews = 'REVIEWS',
+}
+
+export enum Timeout {
+  ShowError = 3000,
+  ShowTrailer = 1000
+}

@@ -3,6 +3,7 @@ import {Cities} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {setActiveCity} from '../../store/action';
 import CityButton from '../city-button/city-button';
+import {getActiveCity} from '../../store/offers-process/selectors';
 
 type CityTabsProps = {
   cities: Cities;
@@ -10,7 +11,7 @@ type CityTabsProps = {
 
 function CityTabs(props: CityTabsProps):JSX.Element {
   const dispatch = useAppDispatch();
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(getActiveCity);
   const {cities} = props;
 
   return (

@@ -3,6 +3,8 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
 import {logoutAction} from '../../store/api-actions';
+import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
+import {getFavoritesOffers} from '../../store/offers-process/selectors';
 
 type HeaderProps = {
   isShowLoginLink?: boolean,
@@ -10,9 +12,9 @@ type HeaderProps = {
 
 function Header({isShowLoginLink = true}: HeaderProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
-  const bookmarkOffers = useAppSelector((state) => state.bookmarksList);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
+  const bookmarkOffers = useAppSelector(getFavoritesOffers);
 
   return (
     <header className="header">
