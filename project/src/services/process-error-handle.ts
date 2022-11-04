@@ -1,5 +1,5 @@
 import {store} from '../store';
-import {setError} from '../store/action';
+import {setError} from '../store/user-process/user-process';
 import {Timeout} from '../const';
 
 export const processErrorHandle = (message: string): void => {

@@ -22,32 +22,42 @@ function FavoritesScreen():JSX.Element {
   return (
     <>
       {isShowSpinner ? <Spinner /> : ''}
-      <div className="page">
+      <div className={`page ${bookmarkOffers.length === 0 ? 'page--favorites-empty' : ''}`}>
         <Header isShowLoginLink />
-        <main className="page__main page__main--favorites">
+        <main className={`page__main page__main--favorites ${bookmarkOffers.length === 0 ? 'page__main--favorites-empty' : ''}`}>
           <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-
+            <section className={`favorites ${bookmarkOffers.length === 0 ? 'favorites--empty' : ''}`}>
               { bookmarkOffers.length ? (
-                <ul className="favorites__list">
-                  { citiesSet.map((city) => (
-                    <li className="favorites__locations-items" key={city}>
-                      <div className="favorites__locations locations locations--current">
-                        <div className="locations__item">
-                          <a className="locations__item-link" href="#">
-                            <span>{city}</span>
-                          </a>
+                <>
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <ul className="favorites__list">
+                    { citiesSet.map((city) => (
+                      <li className="favorites__locations-items" key={city}>
+                        <div className="favorites__locations locations locations--current">
+                          <div className="locations__item">
+                            <a className="locations__item-link" href="#">
+                              <span>{city}</span>
+                            </a>
+                          </div>
                         </div>
-                      </div>
-                      <PlacesList
-                        offers={bookmarkOffers.filter((offer) => offer.city.name === city)}
-                        isFavoritesList
-                      />
-                    </li>
-                  )) }
-                </ul>
-              ) : <p className="favorites__empty-message">Nothing yet saved</p> }
+                        <PlacesList
+                          offers={bookmarkOffers.filter((offer) => offer.city.name === city)}
+                          isFavoritesList
+                        />
+                      </li>
+                    )) }
+                  </ul>
+                </>
+              ) :
+                <>
+                  <h1 className="visually-hidden">Favorites (empty)</h1>
+                  <div className="favorites__status-wrapper">
+                    <b className="favorites__status">Nothing yet saved.</b>
+                    <p className="favorites__status-description">Save properties to narrow
+                      down search or plan your future trips.
+                    </p>
+                  </div>
+                </> }
             </section>
           </div>
         </main>

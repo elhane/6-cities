@@ -30,7 +30,14 @@ function Header({isShowLoginLink = true}: HeaderProps): JSX.Element {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link to={AppRoute.Favourites} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <div
+                      className="header__avatar-wrapper user__avatar-wrapper"
+                      style={{
+                        backgroundImage: `url(${userData.avatarUrl})`,
+                        borderRadius: '50%'
+                      }}
+                    >
+                    </div>
                     <span className="header__user-name user__name">{userData.email}</span>
                     <span className="header__favorite-count">{bookmarkOffers.length}</span>
                   </Link>
