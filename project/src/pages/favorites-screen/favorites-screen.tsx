@@ -1,6 +1,4 @@
 import './favorites-screen.css';
-import FavoritesPlacesList
-  from '../../components/favorites-places-list/favorites-places-list';
 import Header from '../../components/header/header';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import Footer from '../../components/footer/footer';
@@ -8,6 +6,7 @@ import {getFavoritesOffers, getSpinnerStatus} from '../../store/offers-process/s
 import {useEffect} from 'react';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
 import Spinner from '../../components/spinner/spinner';
+import PlacesList from '../../components/places-list/places-list';
 
 function FavoritesScreen():JSX.Element {
   const bookmarkOffers = useAppSelector(getFavoritesOffers);
@@ -41,8 +40,9 @@ function FavoritesScreen():JSX.Element {
                           </a>
                         </div>
                       </div>
-                      <FavoritesPlacesList
+                      <PlacesList
                         offers={bookmarkOffers.filter((offer) => offer.city.name === city)}
+                        isFavoritesList
                       />
                     </li>
                   )) }

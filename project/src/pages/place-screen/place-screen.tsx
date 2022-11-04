@@ -1,5 +1,4 @@
 import {useParams} from 'react-router-dom';
-import NearPlacesList from '../../components/favorites-places-list/favorites-places-list';
 import ReviewForm from '../../components/review-form/review-form';
 import {getPercentRatio} from '../../utils';
 import {AuthorizationStatus, MAX_RATING} from '../../const';
@@ -14,6 +13,7 @@ import {getCurrentOffer, getNearbyOffers} from '../../store/offers-process/selec
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {getSpinnerStatus} from '../../store/offers-process/selectors';
 import Spinner from '../../components/spinner/spinner';
+import PlacesList from '../../components/places-list/places-list';
 
 function PlaceScreen():JSX.Element {
   const dispatch = useAppDispatch();
@@ -153,7 +153,7 @@ function PlaceScreen():JSX.Element {
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <NearPlacesList offers={nearbyOffers} />
+              <PlacesList offers={nearbyOffers} isNearPlacesList/>
             </section>
           </div>
         </main>

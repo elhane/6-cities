@@ -64,6 +64,7 @@ function MainScreen():JSX.Element {
                 offers={sortedOffers as Offers}
                 onMouseOver={setActiveCard}
                 onMouseOut={() => setActiveCard(null)}
+                isCitiesList
               />
             </section>
             <div className="cities__right-section">
