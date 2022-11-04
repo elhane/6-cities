@@ -1,12 +1,14 @@
-import {Offers} from '../../types/offer';
+import {Offers, Offer} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
 
 type PlacesListProps = {
   offers: Offers;
+  onMouseOver?: (offer: Offer) => void;
+  onMouseOut?: () => void;
 }
 
 function PlacesList(props: PlacesListProps):JSX.Element {
-  const {offers} = props;
+  const {offers, onMouseOver, onMouseOut} = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -16,6 +18,8 @@ function PlacesList(props: PlacesListProps):JSX.Element {
             key={offer.id}
             offer={offer}
             isCitiesListCard
+            onMouseOver={() => onMouseOver ? onMouseOver(offer) : null }
+            onMouseOut={onMouseOut}
           />
         ))
       ) : ''}

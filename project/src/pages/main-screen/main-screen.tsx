@@ -13,7 +13,7 @@ import {
   sortByPriceLowToHigh,
   sortByRating
 } from '../../services/sorting';
-import {Offers} from '../../types/offer';
+import {Offers, Offer} from '../../types/offer';
 import {getActiveCity, getOffers} from '../../store/offers-process/selectors';
 
 function MainScreen():JSX.Element {
@@ -23,6 +23,7 @@ function MainScreen():JSX.Element {
   const activeCityData = filteredOffers[0] ? filteredOffers[0].city : DEFAULT_CITY_DATA;
   const dispatch = useAppDispatch();
   const [selectedOption, setSelectedOption] = useState('popular');
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
 
   const getSortedOffers = (option: string) => {
     switch (option) {
@@ -59,12 +60,20 @@ function MainScreen():JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
               <Sorting onMouseClick={setSelectedOption} />
-              <PlacesList offers={sortedOffers as Offers} />
+              <PlacesList
+                offers={sortedOffers as Offers}
+                onMouseOver={setActiveCard}
+                onMouseOut={() => setActiveCard(null)}
+              />
             </section>
             <div className="cities__right-section">
 
               <section className="cities__map map">
-                <Map city={activeCityData} offers={filteredOffers}/>
+                <Map
+                  city={activeCityData}
+                  offers={filteredOffers}
+                  selectedOffer={activeCard}
+                />
               </section>
             </div>
           </div>

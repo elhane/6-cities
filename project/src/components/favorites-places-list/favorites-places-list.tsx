@@ -1,20 +1,23 @@
 import {Offers} from '../../types/offer';
 import PlaceCard from '../place-card/place-card';
+import {useAppSelector} from '../../hooks';
+import {getNearbyOffers} from '../../store/offers-process/selectors';
 
 type NearPlacesListProps = {
   offers: Offers;
 }
 
-function FavoritesPlacesList({offers}: NearPlacesListProps):JSX.Element {
+function NearPlacesList({offers}: NearPlacesListProps):JSX.Element {
+  const nearbyOffersList = useAppSelector(getNearbyOffers);
 
   return (
-    <div className="favorites__places">
-      {FavoritesPlacesList.length ? (
+    <div className="near-places__list places__list">
+      {nearbyOffersList.length ? (
         offers.map((offer) => (
           <PlaceCard
             key={offer.id}
             offer={offer}
-            isFavoritesListCard
+            isNearPlacesListCard
           />
         ))
       ) : ''}
@@ -22,4 +25,4 @@ function FavoritesPlacesList({offers}: NearPlacesListProps):JSX.Element {
   );
 }
 
-export default FavoritesPlacesList;
+export default NearPlacesList;

@@ -5,7 +5,7 @@ type FavoritesPlacesListProps = {
   offers: Offers;
 }
 
-function FavoritesPlacesList(props: FavoritesPlacesListProps):JSX.Element {
+function NearPlacesList(props: FavoritesPlacesListProps):JSX.Element {
   const {offers} = props;
 
   return (
@@ -23,4 +23,4 @@ function FavoritesPlacesList(props: FavoritesPlacesListProps):JSX.Element {
   );
 }
 
-export default FavoritesPlacesList;
+export default NearPlacesList;

@@ -1,5 +1,5 @@
 import {Offer} from '../../types/offer';
-import {useState} from 'react';
+import {MouseEventHandler} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {getPercentRatio} from '../../utils';
@@ -11,19 +11,26 @@ type PlaceCardProps = {
   isFavoritesListCard?: boolean;
   isCitiesListCard?: boolean;
   isNearPlacesListCard?: boolean;
+  onMouseOver?: MouseEventHandler<HTMLElement>;
+  onMouseOut?: MouseEventHandler<HTMLElement>;
 }
 
 function PlaceCard(props: PlaceCardProps):JSX.Element {
-  const {offer, isCitiesListCard, isFavoritesListCard, isNearPlacesListCard } = props;
+  const {
+    offer,
+    isCitiesListCard,
+    isFavoritesListCard,
+    isNearPlacesListCard,
+    onMouseOver,
+    onMouseOut
+  } = props;
   const {previewImage, price, title, type, id, isPremium, rating} = offer;
-  const [isCardActive, setIsCardActive] = useState(false);
 
   const cardClass = classNames({
     'place-card': true,
     'cities__card': isCitiesListCard,
     'favorites__card': isFavoritesListCard,
     'near-places__card': isNearPlacesListCard,
-    'active': isCardActive
   });
 
   const imageWrapperClass = classNames({
@@ -38,16 +45,12 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
     'favorites__card-info': isFavoritesListCard
   });
 
-  const handleCardMouseOver = () => {
-    setIsCardActive(true);
-  };
-
-  const handleCardMouseOut = () => {
-    setIsCardActive(false);
-  };
-
   return (
-    <article className={cardClass} onMouseOver={handleCardMouseOver} onMouseOut={handleCardMouseOut}>
+    <article
+      className={cardClass}
+      onMouseOut={onMouseOut}
+      onMouseOver={onMouseOver}
+    >
       { isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
