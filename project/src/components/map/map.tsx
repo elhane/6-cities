@@ -1,6 +1,6 @@
 import {Marker, LayerGroup, Icon} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {useEffect, useRef} from 'react';
+import {memo, useEffect, useRef} from 'react';
 import useMap from '../../hooks/useMap';
 import {Offers, Offer} from '../../types/offer';
 import {City} from '../../types/offer';
@@ -54,7 +54,7 @@ function Map({city, offers, selectedOffer}: MapProps) {
 
       layersRef.current.addTo(map);
     }
-  }, [map, offers]);
+  }, [map, offers, selectedOffer]);
 
   useEffect(() => {
     if (map) {
@@ -74,4 +74,4 @@ function Map({city, offers, selectedOffer}: MapProps) {
   );
 }
 
-export default Map;
+export default memo(Map);

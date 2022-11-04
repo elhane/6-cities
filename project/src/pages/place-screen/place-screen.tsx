@@ -22,6 +22,7 @@ function PlaceScreen():JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isShowSpinner = useAppSelector(getSpinnerStatus);
+  const mapOffers = [...nearbyOffers, currentOffer];
 
   const {
     images,
@@ -147,7 +148,7 @@ function PlaceScreen():JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={city} offers={nearbyOffers}/>
+              <Map city={city} offers={mapOffers} selectedOffer={currentOffer}/>
             </section>
           </section>
           <div className="container">
