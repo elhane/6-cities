@@ -24,24 +24,24 @@ describe('Reducer: userProcess', () => {
   });
 
   describe('checkAuthAction test', () => {
-    it('should change authorizationStatus to NoAuth', () => {
+    it('should change authorizationStatus to NO_AUTH', () => {
       expect(userProcess.reducer(state, {type: checkAuthAction.rejected.type}))
         .toEqual({...state, authorizationStatus: AuthorizationStatus.NoAuth});
     });
 
-    it('should change authorizationStatus to Auth, add userData to state', () => {
+    it('should change authorizationStatus to AUTH, add userData to state', () => {
       expect(userProcess.reducer(state, {type: checkAuthAction.fulfilled.type, payload: userData}))
         .toEqual({...state, authorizationStatus: AuthorizationStatus.Auth, userData: userData});
     });
   });
 
   describe('loginAction test', () => {
-    it('should change authorizationStatus to NoAuth', () => {
+    it('should change authorizationStatus to NO_AUTH', () => {
       expect(userProcess.reducer(state, {type: loginAction.rejected.type}))
         .toEqual({...state, authorizationStatus: AuthorizationStatus.NoAuth});
     });
 
-    it('should change authorizationStatus to Auth, add userData to state', () => {
+    it('should change authorizationStatus to AUTH, add userData to state', () => {
       expect(userProcess.reducer(state, {type: loginAction.fulfilled.type, payload: userData}))
         .toEqual({...state, authorizationStatus: AuthorizationStatus.Auth, userData: userData});
     });
