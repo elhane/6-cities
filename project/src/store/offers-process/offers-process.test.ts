@@ -62,7 +62,7 @@ describe('Reducer: offersProcess', () => {
 
   describe('fetchOffersAction test', () => {
     it('should change isShowSpinner to true', () => {
-      expect(offersProcess.reducer(state, {type: fetchOffersAction.pending.type,}))
+      expect(offersProcess.reducer(state, {type: fetchOffersAction.pending.type}))
         .toEqual({...state, isShowSpinner: true})
     });
 
@@ -82,7 +82,7 @@ describe('Reducer: offersProcess', () => {
   });
 
   describe('fetchNearbyOffersAction test', () => {
-    it('should add nearby offers  to state, change isShowSpinner to false', () => {
+    it('should add nearby offers to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchNearbyOffersAction.fulfilled.type,
         payload: offers })).toEqual({...state, nearbyOffers: offers, isShowSpinner: false})
@@ -90,7 +90,7 @@ describe('Reducer: offersProcess', () => {
   });
 
   describe('fetchFavoriteOffersAction test', () => {
-    it('should add bookmark offers  to state, change isShowSpinner to false', () => {
+    it('should add bookmark offers to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchFavoriteOffersAction.fulfilled.type,
         payload: offers })).toEqual({...state, bookmarksList: offers, isShowSpinner: false})

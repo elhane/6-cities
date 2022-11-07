@@ -1,5 +1,7 @@
-import {address ,random, internet, datatype, image} from 'faker';
+import {address ,random, internet, datatype, image, date} from 'faker';
 import {Offer, Offers} from './types/offer';
+import {Reviews, ReviewType} from './types/reviews';
+import {User} from './types/user';
 
 export const makeFakeCityName = (): string => (address.cityName());
 
@@ -19,7 +21,7 @@ export const makeFakeOffer = ():Offer => (
     host: {
       id: datatype.number(),
       name: internet.userName(),
-      isPro: false,
+      isPro: datatype.boolean(),
       avatarUrl: internet.avatar(),
     },
     id: datatype.number(),
@@ -38,6 +40,23 @@ export const makeFakeOffer = ():Offer => (
     title: random.words(4),
     type:  random.word(),
   }
-)
+);
 
 export const makeFakeOffers = (): Offers => Array.from({length: datatype.number(10)}).map(() => makeFakeOffer());
+
+export const makeFakeReview = (): ReviewType => (
+  {
+    comment: random.words(20),
+    date: String(date.past(3)),
+    id: datatype.number(),
+    rating: datatype.number(5),
+    user: {
+      avatarUrl: internet.avatar(),
+      id: datatype.number(),
+      isPro: datatype.boolean(),
+      name: internet.userName(),
+    },
+  }
+);
+
+export const makeFakeReviews = (): Reviews => Array.from({length: 6}).map(() => makeFakeReview());
