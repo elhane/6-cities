@@ -2,10 +2,11 @@ import {address ,random, internet, datatype, image, date} from 'faker';
 import {Offer, Offers} from './types/offer';
 import {Reviews, ReviewType} from './types/reviews';
 import {User} from './types/user';
+import {UserData, UserType} from './types/user-data';
 
 export const makeFakeCityName = (): string => (address.cityName());
 
-export const makeFakeOffer = ():Offer => (
+export const makeFakeOffer = (): Offer => (
   {
     bedrooms: 0,
     city: {
@@ -60,3 +61,12 @@ export const makeFakeReview = (): ReviewType => (
 );
 
 export const makeFakeReviews = (): Reviews => Array.from({length: 6}).map(() => makeFakeReview());
+
+export const makeFakeUserData = (): UserType => (
+  {
+    name: internet.userName(),
+    email: internet.email(),
+    id: datatype.number(),
+    avatarUrl: internet.avatar()
+  }
+)
