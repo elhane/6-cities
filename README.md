@@ -1,8 +1,13 @@
 # 6 cities
----
 
 A service for travelers who do not want to overpay for rental housing. 
 Choose one of the six popular cities to travel to and get an up-to-date list of rental offers. Detailed information about housing, the display of the object on the map, as well as the laconic interface of the service will help you quickly choose the best offer.
+
+<div>
+    <img src="./6-cities.gif" alt="My Project GIF" width="880" height="460" style="width: 100%; height: auto; pointer-events: none;">
+</div>
+
+### 👉 [view published version](https://elhane.github.io/6-cities/)
 
 ---
 
@@ -25,8 +30,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-
-### Published version is available on
-
-// TODO ...add link later
 
