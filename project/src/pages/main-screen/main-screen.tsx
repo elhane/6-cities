@@ -6,7 +6,7 @@ import {CITIES, DEFAULT_CITY_DATA} from '../../const';
 import Header from '../../components/header/header';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import {fetchOffersAction} from '../../store/api-actions';
+import {fetchFavoriteOffersAction, fetchOffersAction} from '../../store/api-actions';
 import Sorting from '../../components/sorting/sorting';
 import {
   sortByPriceHighToLow,
@@ -41,6 +41,7 @@ function MainScreen():JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
   return (
