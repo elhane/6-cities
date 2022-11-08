@@ -1,7 +1,6 @@
 # 6 cities
 
-A service for travelers who do not want to overpay for rental housing. 
-Choose one of the six popular cities to travel to and get an up-to-date list of rental offers. Detailed information about housing, the display of the object on the map, as well as the laconic interface of the service will help you quickly choose the best offer.
+«Шесть городов» — сервис для путешественников, не желающих переплачивать за аренду жилья. Выбирайте один из шести популярных городов для путешествий и получайте актуальный список предложений по аренде. Подробная информация о жилье, показ объекта на карте, а также лаконичный интерфейс сервиса помогут быстро выбрать оптимальное предложение.
 
 <div>
     <img src="./6-cities.gif" alt="My Project GIF" width="880" height="460" style="width: 100%; height: auto; pointer-events: none;">
@@ -23,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+See the section![](../../../6-cities — копия.gif) about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
