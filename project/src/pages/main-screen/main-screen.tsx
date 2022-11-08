@@ -15,6 +15,7 @@ import {
 } from '../../services/sorting';
 import {Offers, Offer} from '../../types/offer';
 import {getActiveCity, getFilteredOffers} from '../../store/offers-process/selectors';
+import {resetCity} from '../../store/offers-process/offers-process';
 
 function MainScreen():JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
@@ -43,6 +44,10 @@ function MainScreen():JSX.Element {
     dispatch(fetchOffersAction());
     dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(resetCity());
+  } , []);
 
   return (
     <div className="page page--gray page--main">

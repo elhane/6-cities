@@ -1,6 +1,6 @@
 import {OffersProcess} from '../../types/state';
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../const';
+import {DEFAULT_CITY_DATA, NameSpace} from '../../const';
 import {
   fetchCurrentOfferAction, fetchFavoriteOffersAction,
   fetchNearbyOffersAction,
@@ -55,6 +55,9 @@ export const offersProcess = createSlice({
   reducers: {
     setActiveCity: (state, action) => {
       state.city = action.payload;
+    },
+    resetCity: (state) => {
+      state.city = DEFAULT_CITY_DATA.name;
     }
   },
   extraReducers(builder) {
@@ -94,4 +97,4 @@ export const offersProcess = createSlice({
   }
 });
 
-export const {setActiveCity} = offersProcess.actions;
+export const {setActiveCity, resetCity} = offersProcess.actions;
