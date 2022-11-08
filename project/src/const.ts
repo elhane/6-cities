@@ -17,8 +17,8 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 300;
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const URL_MARKER_DEFAULT = 'img/pin.svg';
-export const URL_MARKER_CURRENT = 'img/pin-active.svg';
+export const URL_MARKER_DEFAULT = '/6-cities/img/pin.svg';
+export const URL_MARKER_CURRENT = '/6-cities/img/pin-active.svg';
 
 export const CITIES = [
   'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'
