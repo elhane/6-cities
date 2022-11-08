@@ -36,6 +36,7 @@ function App(): JSX.Element {
           }
         />
         <Route path="*" element={<NotFoundScreen />} />
+        <Route path="6-cities" element={<MainScreen />}/>
       </Routes>
     </HistoryRouter>
   );
