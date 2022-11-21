@@ -57,19 +57,19 @@ describe('Reducer: offersProcess', () => {
       bookmarksList: [],
       nearbyOffers: [],
       isShowSpinner: false,
-    }
+    };
   });
 
   describe('fetchOffersAction test', () => {
     it('should change isShowSpinner to true', () => {
       expect(offersProcess.reducer(state, {type: fetchOffersAction.pending.type}))
-        .toEqual({...state, isShowSpinner: true})
+        .toEqual({...state, isShowSpinner: true});
     });
 
     it('should add offers to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchOffersAction.fulfilled.type,
-        payload: offers })).toEqual({...state, offers, isShowSpinner: false})
+        payload: offers })).toEqual({...state, offers, isShowSpinner: false});
     });
   });
 
@@ -77,7 +77,7 @@ describe('Reducer: offersProcess', () => {
     it('should add currentOffer to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchCurrentOfferAction.fulfilled.type,
-        payload: offer })).toEqual({...state, currentOffer: offer, isShowSpinner: false})
+        payload: offer })).toEqual({...state, currentOffer: offer, isShowSpinner: false});
     });
   });
 
@@ -85,7 +85,7 @@ describe('Reducer: offersProcess', () => {
     it('should add nearby offers to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchNearbyOffersAction.fulfilled.type,
-        payload: offers })).toEqual({...state, nearbyOffers: offers, isShowSpinner: false})
+        payload: offers })).toEqual({...state, nearbyOffers: offers, isShowSpinner: false});
     });
   });
 
@@ -93,14 +93,14 @@ describe('Reducer: offersProcess', () => {
     it('should add bookmark offers to state, change isShowSpinner to false', () => {
       expect(offersProcess.reducer(state, {
         type: fetchFavoriteOffersAction.fulfilled.type,
-        payload: offers })).toEqual({...state, bookmarksList: offers, isShowSpinner: false})
+        payload: offers })).toEqual({...state, bookmarksList: offers, isShowSpinner: false});
     });
   });
 
   describe('setActiveCity test', () => {
     it('should change city', () => {
       expect(offersProcess.reducer(state, {type: setActiveCity.type, payload: city }))
-        .toEqual({...state, city})
+        .toEqual({...state, city});
     });
   });
 });

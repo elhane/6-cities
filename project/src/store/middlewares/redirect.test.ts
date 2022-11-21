@@ -30,8 +30,8 @@ describe('Middleware: redirect', () => {
   });
 
   it('should not redirect to /login because bad action', () => {
-    store.dispatch({type: "UNKNOWN_ACTION", payload: AppRoute.Login});
+    store.dispatch({type: 'UNKNOWN_ACTION', payload: AppRoute.Login});
     expect(fakeHistory.location.pathname).not.toBe(AppRoute.Login);
-  })
+  });
 
 });

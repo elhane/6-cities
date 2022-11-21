@@ -35,4 +35,4 @@ describe('Async actions', () => {
       checkAuthAction.fulfilled.type
     ]);
   });
-})
+});

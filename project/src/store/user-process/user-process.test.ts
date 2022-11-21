@@ -1,7 +1,6 @@
 import {userProcess} from './user-process';
 import {UserProcess} from '../../types/state';
 import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
-import {setError} from './user-process';
 import {AuthorizationStatus} from '../../const';
 import {makeFakeUserData} from '../../mocks';
 
@@ -20,7 +19,7 @@ describe('Reducer: userProcess', () => {
       },
       error: null,
       isShowSpinner: false,
-    }
+    };
   });
 
   describe('checkAuthAction test', () => {
@@ -50,7 +49,7 @@ describe('Reducer: userProcess', () => {
   describe('logoutAction test', () => {
     it('should change authorizationStatus to NoAuth', () => {
       expect(userProcess.reducer(state, {type: logoutAction.fulfilled.type}))
-        .toEqual({...state, authorizationStatus: AuthorizationStatus.NoAuth})
+        .toEqual({...state, authorizationStatus: AuthorizationStatus.NoAuth});
     });
   });
 });
