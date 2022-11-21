@@ -3,7 +3,7 @@ import {MouseEventHandler} from 'react';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {getPercentRatio} from '../../utils';
-import {MAX_RATING} from '../../const';
+import {AppRoute, MAX_RATING} from '../../const';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 
 type PlaceCardProps = {
@@ -57,12 +57,12 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
         </div> }
 
       <div className={imageWrapperClass}>
-        <Link to={`/room/${id}`}>
+        <Link to={`${AppRoute.Root}room/${id}`}>
           <img className="place-card__image"
             src={previewImage}
             width={isCitiesListCard || isNearPlacesListCard ? '260' : '150' }
             height={isCitiesListCard ? '200' : '110' }
-            alt="Place image"
+            alt="Place photo"
           />
         </Link>
       </div>
@@ -86,7 +86,7 @@ function PlaceCard(props: PlaceCardProps):JSX.Element {
         </div>
 
         <h2 className="place-card__name">
-          <Link to={`/room/${id}`}>{title}</Link>
+          <Link to={`${AppRoute.Root}room/${id}`}>{title}</Link>
         </h2>
 
         <p className="place-card__type">{type}</p>

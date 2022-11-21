@@ -1,4 +1,5 @@
 import './form-error.css';
+import {memo} from 'react';
 
 type FormErrorProps = {
   error: string;
@@ -13,4 +14,4 @@ function FormError({ error, extraClass = ''}: FormErrorProps): JSX.Element {
   );
 }
 
-export default FormError;
+export default memo(FormError);

@@ -1,8 +1,7 @@
 import {address ,random, internet, datatype, image, date} from 'faker';
 import {Offer, Offers} from './types/offer';
 import {Reviews, ReviewType} from './types/reviews';
-import {User} from './types/user';
-import {UserData, UserType} from './types/user-data';
+import {UserType} from './types/user-data';
 
 export const makeFakeCityName = (): string => (address.cityName());
 
@@ -69,4 +68,4 @@ export const makeFakeUserData = (): UserType => (
     id: datatype.number(),
     avatarUrl: internet.avatar()
   }
-)
+);

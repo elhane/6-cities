@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Cities} from '../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {setActiveCity} from '../../store/offers-process/offers-process';
@@ -34,4 +34,4 @@ function CityTabs(props: CityTabsProps):JSX.Element {
   );
 }
 
-export default CityTabs;
+export default memo(CityTabs);

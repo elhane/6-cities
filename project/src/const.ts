@@ -1,9 +1,9 @@
 export enum AppRoute {
-  Root = '/',
-  Login = '/login',
-  Room = '/room/:id',
-  Favourites = '/favorites',
-  NotFound = '/not_found'
+  Root = '/6-cities/',
+  Login = '/6-cities/login',
+  Room = '/6-cities/room/:id',
+  Favourites = '/6-cities/favorites',
+  NotFound = '/6-cities/not_found'
 }
 
 export enum AuthorizationStatus {
@@ -15,8 +15,6 @@ export enum AuthorizationStatus {
 export const MAX_RATING = 5;
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 300;
-export const TIMEOUT_SHOW_ERROR = 2000;
-
 export const URL_MARKER_DEFAULT = '/6-cities/img/pin.svg';
 export const URL_MARKER_CURRENT = '/6-cities/img/pin-active.svg';
 
@@ -56,5 +54,4 @@ export enum NameSpace {
 
 export enum Timeout {
   ShowError = 3000,
-  ShowTrailer = 1000
 }

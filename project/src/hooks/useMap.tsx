@@ -32,7 +32,7 @@ function useMap(
     }
 
 
-  }, [mapRef, city, map, isRenderedRef]);
+  }, [mapRef.current, city, map, isRenderedRef.current]);
 
   return map;
 }

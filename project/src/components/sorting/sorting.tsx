@@ -1,5 +1,5 @@
 import './sorting.css';
-import {useState} from 'react';
+import {useState,memo} from 'react';
 import classNames from 'classnames';
 import {options} from '../../services/sorting';
 
@@ -53,4 +53,4 @@ function Sorting({ onMouseClick }: SortingProps): JSX.Element {
   );
 }
 
-export default Sorting;
+export default memo(Sorting);

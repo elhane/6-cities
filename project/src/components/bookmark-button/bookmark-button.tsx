@@ -17,6 +17,8 @@ function BookmarkButton({placeId, isPropertyPage = false}: BookmarkButtonProps):
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isOfferInBookmarks = bookmarksList.find((offer) => offer.id === placeId);
+  const imgWidth = isPropertyPage ? 31 : 18;
+  const imgHeight = isPropertyPage ? 33 : 19;
 
   const handleBookmarkButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -36,14 +38,9 @@ function BookmarkButton({placeId, isPropertyPage = false}: BookmarkButtonProps):
 
   return (
     <button className={placeCardClass} type="button" onClick={handleBookmarkButtonClick}>
-      { isPropertyPage ?
-        <svg className="place-card__bookmark-icon" width="31" height="33">
-          <use xlinkHref="#icon-bookmark"></use>
-        </svg>
-        :
-        <svg className="place-card__bookmark-icon" width="18" height="19">
-          <use xlinkHref="#icon-bookmark"></use>
-        </svg> }
+      <svg className="place-card__bookmark-icon" width={imgWidth} height={imgHeight}>
+        <use xlinkHref="#icon-bookmark"></use>
+      </svg>
       <span className="visually-hidden">In bookmarks</span>
     </button>
   );
